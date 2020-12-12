@@ -23,7 +23,34 @@ namespace Curso
             // InserirDadosEmMassa();
             // ConsultarDados();
             // CadastrarPedido();
-            ConsultarPedidocarregamentoAdiantado();
+            // ConsultarPedidocarregamentoAdiantado();
+            AtualizarDados();
+        }
+
+        private static void AtualizarDados()
+        {
+            using var db = new Data.ApplicationContext();
+            // var cliente = db.Clientes.Find(11);
+            // cliente.Nome = "Cliente Alterado Passo 2";
+            // db.Entry(cliente).State = EntityState.Modified;
+
+            var cliente = new Cliente
+            {
+                Id = 11
+            };
+
+            var clienteDesconectado = new
+            {
+                Nome = "Cliente Desconectado Passo 3",
+                Telefone = "123456123"
+            };
+
+            db.Attach(cliente);
+            db.Entry(cliente).CurrentValues.SetValues(clienteDesconectado);
+
+            // db.Clientes.Update(cliente);
+            db.SaveChanges();
+
         }
 
         private static void ConsultarPedidocarregamentoAdiantado()
