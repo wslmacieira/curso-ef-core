@@ -24,7 +24,21 @@ namespace Curso
             // ConsultarDados();
             // CadastrarPedido();
             // ConsultarPedidocarregamentoAdiantado();
-            AtualizarDados();
+            // AtualizarDados();
+            RemoverRegistro();
+        }
+
+        private static void RemoverRegistro()
+        {
+            using var db = new Data.ApplicationContext();
+            // var cliente = db.Clientes.Find(11);
+            var cliente = new Cliente { Id = 12 };
+            // db.Clientes.Remove(cliente);
+            // db.Remove(cliente);
+            db.Entry(cliente).State = EntityState.Deleted;
+
+            db.SaveChanges();
+
         }
 
         private static void AtualizarDados()
@@ -136,25 +150,25 @@ namespace Curso
             {
                 new Cliente
             {
-                Nome = "Wagner Santos Lima",
-                CEP = "999999999",
+                Nome = "Wagner Santos Teste 1",
+                CEP = "99999999",
                 Cidade = "São Paulo",
                 Estado = "SP",
-                Telefone = "990022003311"
+                Telefone = "99002200331"
             },
                 new Cliente
             {
-                Nome = "Daniela Santos Lima",
-                CEP = "999999999",
+                Nome = "Daniela Santos teste 2",
+                CEP = "99999999",
                 Cidade = "São Paulo",
                 Estado = "SP",
-                Telefone = "990022003311"
+                Telefone = "99002200331"
             },
             };
 
             using var db = new Data.ApplicationContext();
-            db.AddRange(produto, cliente);
-            // db.Set<Cliente>().AddRange(listaClientes);
+            // db.AddRange(produto, cliente);
+            db.Set<Cliente>().AddRange(listaClientes);
             // db.Clientes.AddRange(listaClientes);
 
             var registros = db.SaveChanges();
